@@ -5,9 +5,12 @@
 package org.aa8426.robot2023;
 
 import org.aa8426.robot2023.commands.Autons;
+import org.aa8426.robot2023.subsystems.SwerveModule;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -48,12 +51,14 @@ public class Robot extends TimedRobot {
 
         //GyroLog.update(robotContainer.swerveSubsystem.gyro);
         //PowerLog.update(robotContainer.pdp);
-       
-        SmartDashboard.putNumber("gyro",robotContainer.swerveSubsystem.gyro.getAngle());
+    
+        SmartDashboard.putNumber("gyro", robotContainer.swerveSubsystem.gyro.getAngle());
+        
         //armSpeed = rubyTab.addPersistent("Arm Speed", 1.0).getEntry();        
         //SmartDashboard.putNumber("time", Timer.getFPGATimestamp());
         //Shuffleboard.update();
         //shuffleboard.update(operatorInterface);
+        this.robotContainer.swerveSubsystem.updateSmartDashboard();
         //SmartDashboard.putNumber("moving", robotContainer.swerveSubsystem.odometer.getPoseMeters().getX());
     }
     /** This function is called once each time the robot enters Disabled mode. */
@@ -109,14 +114,50 @@ public class Robot extends TimedRobot {
         this.operatorInterface.onTeleopPeriodic();
     }
 
+    SwerveModule testingModule = null;
+
     @Override
     public void testInit() {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
+        testingModule = null;
     }
+    
+    public double angle = 0;
 
-    /** This function is called periodically during test mode. */
+    public void testModuleAngle() {
+        SwerveModuleState sms = new SwerveModuleState();
+        sms.angle = Rotation2d.fromDegrees(angle);
+        sms.speedMetersPerSecond = 0.5;
+        testingModule.setDesiredState(sms);    
+        SmartDashboard.putNumber("angle", angle);
+    }
+    
     @Override
-    public void testPeriodic() {        
+    public void testPeriodic() {
+        if (this.operatorInterface.drivePad.getStartButtonPressed()) {
+            angle = angle + 45;
+        }
+        if (this.operatorInterface.drivePad.getYButtonPressed()) {
+            testingModule = this.robotContainer.swerveSubsystem.frontLeft;
+        }
+        if (this.operatorInterface.drivePad.getBButtonPressed()) {
+            testingModule = this.robotContainer.swerveSubsystem.frontRight;
+        }
+        if (this.operatorInterface.drivePad.getXButtonPressed()) {
+            testingModule = this.robotContainer.swerveSubsystem.backLeft;
+        }
+        if (this.operatorInterface.drivePad.getAButtonPressed()) {
+            testingModule = this.robotContainer.swerveSubsystem.backRight;
+        }
+        
+        if (testingModule == null)
+            return;
+        
+         
+        //this.robotContainer.swerveSubsystem.frontRight.turningMotor.set(5);
+        //this.robotContainer.swerveSubsystem.frontLeft.driveMotor.set(10);
+        //this.robotContainer.swerveSubsystem.backLeft.driveMotor.set(10);
+        //this.robotContainer.swerveSubsystem.backRight.driveMotor.set(5);       
     }
 }

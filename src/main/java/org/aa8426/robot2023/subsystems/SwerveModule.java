@@ -1,16 +1,19 @@
 package org.aa8426.robot2023.subsystems;
 
+import org.aa8426.lib.GyroWrapper;
 import org.aa8426.robot2023.Constants.DriveConstants;
 import org.aa8426.robot2023.Constants.ModuleConstants;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -34,10 +37,10 @@ public class SwerveModule {
     private final double absoluteEncoderOffsetRad;
     
     public final String name;
-    private Gyro gyro;
+    private GyroWrapper gyro;
 
     public SwerveModule(String name, int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
-            int absoluteEncoderId, double absoluteEncoderOffset, boolean absoluteEncoderReversed, Gyro gyro) {                                
+            int absoluteEncoderId, double absoluteEncoderOffset, boolean absoluteEncoderReversed, GyroWrapper gyro) {                                
         this.name = name;        
         this.gyro = gyro;
 
@@ -47,10 +50,10 @@ public class SwerveModule {
         absoluteEncoder = new AnalogEncoder(absoluteEncoderId);
 
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
-        //REVPhysicsSim.getInstance().addSparkMax(driveMotor, DCMotor.getNEO(1));
 
         //driveMotor.setSmartCurrentLimit(40);
         driveMotor.setSmartCurrentLimit(120, 60);
+        //driveMotor.setIdleMode(IdleMode.kBrake);        
         driveMotor.burnFlash();
 
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);

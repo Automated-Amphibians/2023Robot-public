@@ -49,7 +49,11 @@ public class OurShuffleboard {
 
         rubyTab.addBoolean("Arm Check", () -> buttonIsPressed(operatorInterface.armPad)).withPosition(0, 0);
         rubyTab.addBoolean("Drive Check", () -> buttonIsPressed(operatorInterface.drivePad)).withPosition(0, 1);        
+        rubyTab.addDouble("Gyro Angle", () -> this.robotContainer.swerveSubsystem.gyro.getAngle()).withPosition(0, 2);
+        rubyTab.addDouble("Gyro Pitch", () -> this.robotContainer.swerveSubsystem.gyro.getPitch()).withPosition(0, 3);
+        rubyTab.addDouble("Gyro Yaw", () -> this.robotContainer.swerveSubsystem.gyro.getYaw()).withPosition(0, 4);
         
+
         rubyTab.add(VideoSource.enumerateSources()[0]).withSize(3, 3).withPosition(1, 2);
                         
         Shuffleboard.selectTab("Ruby");                

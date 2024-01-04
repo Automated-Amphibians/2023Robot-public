@@ -15,7 +15,7 @@ import edu.wpi.first.math.util.Units;
  * https://www.chiefdelphi.com/t/swerve-odometry-has-y-axis-direction-reversed/426363
  * https://www.chiefdelphi.com/t/to-x-lock-or-not-that-is-the-question/423999/6
  */
-public final class Constants {
+public final class ConstantsOld {
     
     // 150/7:1 
     // The steering gear ratio of the MK4i is 150/7:1.
@@ -25,9 +25,9 @@ public final class Constants {
     // L3 - 6.12: 1 (NEO Free Speed: 16ft/s, Falcon: 18ft/s)
     public static final class ModuleConstants {
         private static final double kWheelDiameterMeters = Units.inchesToMeters(4);
-        private static final double kDriveMotorGearRatio = 1 / 6.12;
-        // private static final double kTurningMotorGearRatio = 1 / 18.0; // The steering gear ratio of the MK4i is 150/7:1.
-        // private static final double kTurningMotorGearRatio = 1 / (150/7);
+        private static final double kDriveMotorGearRatio = 1 / 6.75;
+        //private static final double kTurningMotorGearRatio = 1 / 18.0; // The steering gear ratio of the MK4i is 150/7:1.
+        //private static final double kTurningMotorGearRatio = 1 / (150/7);
 
         @SuppressWarnings("unused")
         private static final double kTurningMotorGearRatio = 1 / (150/7);        
@@ -50,25 +50,26 @@ public final class Constants {
         // Distance between front and back wheels
         
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),  // front left
-            new Translation2d(-kWheelBase / 2, kTrackWidth / 2), // back left
-            new Translation2d(kWheelBase / 2, -kTrackWidth / 2), // front right
-            new Translation2d(kWheelBase / 2, kTrackWidth / 2)  // back right
-        ); 
-         
-        public static final int kFrontRightDriveMotorPort = 5;
-        public static final int kFrontRightTurningMotorPort = 6;        
-        public static final int kFrontLeftDriveMotorPort = 7;
-        public static final int kFrontLeftTurningMotorPort = 8;
-        public static final int kBackRightDriveMotorPort = 3;
-        public static final int kBackRightTurningMotorPort = 4;
-        public static final int kBackLeftDriveMotorPort = 1;
-        public static final int kBackLeftTurningMotorPort = 2;
+            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2), // back left 
+            new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+            new Translation2d(kWheelBase / 2, -kTrackWidth / 2), // front right?
+            new Translation2d(kWheelBase / 2, kTrackWidth / 2) // front left
+            ); 
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.090;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -0.753;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -0.417;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -0.26;    
+         
+        public static final int kFrontRightDriveMotorPort = 8;
+        public static final int kFrontRightTurningMotorPort = 7;        
+        public static final int kFrontLeftDriveMotorPort = 5;
+        public static final int kFrontLeftTurningMotorPort = 6;
+        public static final int kBackRightDriveMotorPort = 10;
+        public static final int kBackRightTurningMotorPort = 9;
+        public static final int kBackLeftDriveMotorPort = 4;
+        public static final int kBackLeftTurningMotorPort = 3;
+
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.210;
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -0.241;
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -0.502;
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -0.443;    
 
         public static final boolean kFrontLeftTurningEncoderReversed = true;
         public static final boolean kBackLeftTurningEncoderReversed = true;
@@ -80,10 +81,10 @@ public final class Constants {
         public static final boolean kFrontRightDriveEncoderReversed = false;
         public static final boolean kBackRightDriveEncoderReversed = false;
 
-        public static final int kFrontLeftDriveAbsoluteEncoderPort = 3;
-        public static final int kBackLeftDriveAbsoluteEncoderPort = 0;
-        public static final int kFrontRightDriveAbsoluteEncoderPort = 2;
-        public static final int kBackRightDriveAbsoluteEncoderPort = 1;
+        public static final int kFrontLeftDriveAbsoluteEncoderPort = 2;
+        public static final int kBackLeftDriveAbsoluteEncoderPort = 3;
+        public static final int kFrontRightDriveAbsoluteEncoderPort = 1;
+        public static final int kBackRightDriveAbsoluteEncoderPort = 0;
 
         public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
         public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;

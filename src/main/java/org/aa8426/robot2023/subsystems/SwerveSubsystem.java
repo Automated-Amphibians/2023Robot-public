@@ -1,8 +1,10 @@
 package org.aa8426.robot2023.subsystems;
 
+import org.aa8426.lib.GyroWrapper;
 import org.aa8426.robot2023.Constants;
 import org.aa8426.robot2023.Constants.DriveConstants;
 
+import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
@@ -25,8 +27,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 // https://github.com/Hemlock5712/swerve-test/blob/main/src/main/java/frc/robot/commands/DriveToPoint.java
 public class SwerveSubsystem extends SubsystemBase {
-    public final AHRS gyro = new AHRS(SPI.Port.kMXP);
-
+    public GyroWrapper gyro = new GyroWrapper();
+        
     public final SwerveModule frontLeft = new SwerveModule("frontLeft",
             DriveConstants.kFrontLeftDriveMotorPort,
             DriveConstants.kFrontLeftTurningMotorPort,
@@ -86,7 +88,7 @@ public class SwerveSubsystem extends SubsystemBase {
      * Return the heading of the robot from the gyroscope. Used for field oriented robot navigation.
      */
     public Rotation2d getRotation2d() {
-        double heading = -Math.IEEEremainder(gyro.getAngle(), 360);        
+        double heading = Math.IEEEremainder(gyro.getAngle(), 360);        
         return Rotation2d.fromDegrees(heading);
     }
 
@@ -125,6 +127,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public void periodic() {
         // Part of 2022->2023 migration that needs to be done -- not required yet        
         odometer.update(getRotation2d(), getModulePositions());
+        
         //SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
     }
 
@@ -156,7 +159,7 @@ public class SwerveSubsystem extends SubsystemBase {
         frontRight.updateSmartDashboard();
         backLeft.updateSmartDashboard();
         backRight.updateSmartDashboard();
-
+        
         SmartDashboard.putNumber("gyro/r2d_deg", gyro.getRotation2d().getDegrees());
         SmartDashboard.putNumber("gyro/r2d_rot", gyro.getRotation2d().getRotations());
         SmartDashboard.putNumber("gyro/raw angle", gyro.getAngle());

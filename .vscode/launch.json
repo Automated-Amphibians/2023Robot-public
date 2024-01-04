@@ -1,0 +1,76 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch OptimizeTurn",
+      "request": "launch",
+      "mainClass": "org.aa8426.lib.OptimizeTurn",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch OperatorInterface",
+      "request": "launch",
+      "mainClass": "org.aa8426.robot2023.OperatorInterface",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch CmdFactory",
+      "request": "launch",
+      "mainClass": "org.aa8426.robot2023.commands.CmdFactory",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch TrackChange",
+      "request": "launch",
+      "mainClass": "org.aa8426.lib.TrackChange",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch SwerveSubsystem",
+      "request": "launch",
+      "mainClass": "org.aa8426.robot2023.subsystems.SwerveSubsystem",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch ConsumerAndProducerExample",
+      "request": "launch",
+      "mainClass": "org.aa8426.lib.ConsumerAndProducerExample",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch Huh",
+      "request": "launch",
+      "mainClass": "org.aa8426.lib.Huh",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "java",
+      "name": "Launch Playground",
+      "request": "launch",
+      "mainClass": "org.aa8426.lib.Playground",
+      "projectName": "2023Season-private"
+    },
+    {
+      "type": "wpilib",
+      "name": "WPILib Desktop Debug",
+      "request": "launch",
+      "desktop": true
+    },
+    {
+      "type": "wpilib",
+      "name": "WPILib roboRIO Debug",
+      "request": "launch",
+      "desktop": false
+    }
+  ]
+}
